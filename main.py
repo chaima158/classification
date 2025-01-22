@@ -2,6 +2,11 @@ import argparse
 import logging
 import os
 import warnings
+<<<<<<< HEAD
+=======
+import mlflow
+import mlflow.pytorch
+>>>>>>> 2f46e2a609c456bfc6c3ec2e56883c26f872f507
 
 warnings.filterwarnings('ignore')
 import torch
@@ -30,6 +35,11 @@ def main(args):
     model = Classifier(len(CLASS_NAMES), backbone=BACKBONE, freeze_backbone=FREEZE_BACKBONE)
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.to(device)
+    mlflow.set_tracking_uri(os.getenv("SECRET_HOST"))
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 2f46e2a609c456bfc6c3ec2e56883c26f872f507
 
     if args.mode == "train":
         # Load the entire dataset
@@ -43,7 +53,7 @@ def main(args):
         criterion = torch.nn.CrossEntropyLoss()
 
         # Define K-fold cross-validation with k=5
-        k_folds = 5
+        k_folds = 2
         kfold = KFold(n_splits=k_folds, shuffle=True)
 
         # K-fold Cross Validation model evaluation
@@ -74,7 +84,11 @@ def main(args):
                 Device:          {device}
             ''')
 
+<<<<<<< HEAD
+            # Run experiments with different hyperparameters
+=======
             # Train the model
+>>>>>>> 2f46e2a609c456bfc6c3ec2e56883c26f872f507
             train_classifier(model, train_loader, val_loader, criterion, optimizer, MAX_EPOCHS_NUM, MODEL_DIR,
                              PLOTS_DIR,
                              device, BACKBONE, FREEZE_BACKBONE)
@@ -98,8 +112,16 @@ if __name__ == "__main__":
                         help="Mode to run: 'train' or 'test'")
     parser.add_argument("--data_path", type=str, required=True,
                         help="Path to dataset")
+<<<<<<< HEAD
+    parser.add_argument("--model_path", type=str, default="./models/cnn_resnet18_freeze_backbone_False.pth",
+                        help="Directory to save or load the model")
+
+    args = parser.parse_args()
+    main(args)
+=======
     parser.add_argument("--model_path", type=str, default="./models/",
                         help="Directory to save or load the model")
 
     args = parser.parse_args()
     main(args)
+>>>>>>> 2f46e2a609c456bfc6c3ec2e56883c26f872f507

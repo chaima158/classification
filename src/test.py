@@ -86,4 +86,8 @@ def test_classifier(model, test_loader, plot_dir, backbone, freeze_backbone, cla
     plt.xlabel('Predicted Labels')
     plt.title('Confusion Matrix')
     plt.savefig(os.path.join(plot_dir, f"cm_{backbone}_freeze_backbone_{freeze_backbone}.png"))
+<<<<<<< HEAD
     plt.show()
+=======
+    plt.show()
+>>>>>>> 2f46e2a609c456bfc6c3ec2e56883c26f872f507
